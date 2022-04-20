@@ -14,16 +14,17 @@ root.attributes("-fullscreen", True)
 root.geometry(str(displayWidth)+"x"+str(displayHeight)+"+0+0")
 pixel = tk.PhotoImage(width=1, height=1)
 
-
 amountOfButtons = 3
 buttonWidth = int(2*displayWidth/7)
 buttonHeight = int(2*displayHeight/7)
 paddingx = int( (displayWidth-amountOfButtons*buttonWidth)/(amountOfButtons+1) )
 paddingy = int( (displayHeight-amountOfButtons*buttonHeight)/(amountOfButtons+1) )
 
-
 var = StringVar()
 var.set("Zacznij pomiar")
+
+startButtonString = StringVar()
+startButtonString.set("Kliknij aby zaczac pomiar")
 
 measurement_time = 0
 speed = 100
@@ -34,13 +35,19 @@ def graph():
     plt.plot(timeTable, speedTable)
     plt.show()
 
+def displayCurrentSpeed(speed):
+    var.set("V = " + str(round(speed, 2)))
+    root.update_idletasks()
+
+def displayCurrendTime(currentTime):
+    startButtonString.set(round(currentTime, 2) )
+    root.update_idletasks()
 
 def myButton2Clicked():
     graph()
 
 def myButton3Clicked():
     root.destroy()
-
 
 def myButton1Clicked():
     var.set("Pomiar trwa")
@@ -50,8 +57,8 @@ def myButton1Clicked():
     print(timeTable)
     print("zarejestrowano " + str(len(speedTable)) + " próbek")
     print("Czas = " + str(measurement_time))
-    var.set(str(measurement_time))
-    root.update_idletasks()
+    #var.set(str(measurement_time))
+    #root.update_idletasks()
 
 def measure(speed):
     measurement_start = time()
@@ -60,14 +67,15 @@ def measure(speed):
         sleep(1 / 18)
         speed = speed + addedValue
         speedTable.append(speed)
-        timeTable.append(    str(time() - measurement_start ) )
-        print(speed)
+        timeTable.append(str(time() - measurement_start))
+        displayCurrentSpeed(speed)
+        displayCurrendTime((time() - measurement_start))
     measurement_stop = time()
     return (measurement_stop - measurement_start)
 
 myButton3 = Button(root, text="Wyjście", bg="#888888", command = myButton3Clicked, image=pixel, height = buttonHeight/3, width = buttonWidth/3, compound="c")
 myButton3.place(x=paddingx, y=paddingy)
-myButton1 = Button(root, text="Kliknij aby zaczac pomiar", bg="#888888", command = myButton1Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c")
+myButton1 = Button(root, textvariable=str(startButtonString), bg="#888888", command = myButton1Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c")
 myButton1.place(x=displayWidth-buttonWidth-paddingx, y=paddingy)
 myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c", )
 myButton2.place(x=displayWidth-buttonWidth-paddingx, y=displayHeight-buttonHeight-paddingy)
