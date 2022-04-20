@@ -3,7 +3,7 @@ from tkinter import *
 from time import *
 import random
 import matplotlib.pyplot as plt
-#import pyrebase
+#import pyrebaseeee
 
 root = tk.Tk()
 displayWidth = root.winfo_screenwidth()
