@@ -36,11 +36,11 @@ def graph():
     plt.show()
 
 def displayCurrentSpeed(speed):
-    var.set("V = " + str(round(speed, 2)))
+    var.set("V = " + str(round(speed, 2)) + " km/h")
     root.update_idletasks()
 
 def displayCurrendTime(currentTime):
-    startButtonString.set(round(currentTime, 2) )
+    startButtonString.set("T = " + str( round(currentTime, 2) ) + " s")
     root.update_idletasks()
 
 def myButton2Clicked():
@@ -57,8 +57,7 @@ def myButton1Clicked():
     print(timeTable)
     print("zarejestrowano " + str(len(speedTable)) + " próbek")
     print("Czas = " + str(measurement_time))
-    #var.set(str(measurement_time))
-    #root.update_idletasks()
+
 
 def measure(speed):
     measurement_start = time()
@@ -71,15 +70,17 @@ def measure(speed):
         displayCurrentSpeed(speed)
         displayCurrendTime((time() - measurement_start))
     measurement_stop = time()
+    startButtonString.set("Czas pomiaru : " + str(round((measurement_stop - measurement_start), 2 )) + " s")
+    root.update_idletasks()
     return (measurement_stop - measurement_start)
 
-myButton3 = Button(root, text="Wyjście", bg="#888888", command = myButton3Clicked, image=pixel, height = buttonHeight/3, width = buttonWidth/3, compound="c")
+myButton3 = Button(root, text="Wyjście", bg="#888888", command = myButton3Clicked, image=pixel, height = buttonHeight/3, width = buttonWidth/3, compound="c", font=("Arial", 25))
 myButton3.place(x=paddingx, y=paddingy)
-myButton1 = Button(root, textvariable=str(startButtonString), bg="#888888", command = myButton1Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c")
+myButton1 = Button(root, textvariable=str(startButtonString), bg="#888888", command = myButton1Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c", font=("Arial", 25))
 myButton1.place(x=displayWidth-buttonWidth-paddingx, y=paddingy)
-myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c", )
+myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2Clicked, image=pixel, height = buttonHeight, width = buttonWidth, compound="c", font=("Arial", 25))
 myButton2.place(x=displayWidth-buttonWidth-paddingx, y=displayHeight-buttonHeight-paddingy)
-myLabel1 = Label(root, textvariable=str(var), bg="#888888", image=pixel, height = buttonHeight, width = buttonWidth, compound="c")
+myLabel1 = Label(root, textvariable=str(var), bg="#888888", image=pixel, height = buttonHeight, width = buttonWidth, compound="c", font=("Arial", 25))
 myLabel1.place(x=displayWidth-buttonWidth-paddingx, y = (displayHeight-buttonHeight)/2)
 
 root.mainloop()
