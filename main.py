@@ -4,7 +4,7 @@ from time import *
 import random
 import matplotlib.pyplot as plt
 #import pyrebase
-#git
+
 root = tk.Tk()
 displayWidth = root.winfo_screenwidth()
 displayHeight = root.winfo_screenheight()
@@ -81,7 +81,6 @@ myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2
 myButton2.place(x=displayWidth-buttonWidth-paddingx, y=displayHeight-buttonHeight-paddingy)
 myLabel1 = Label(root, textvariable=str(var), bg="#888888", image=pixel, height = buttonHeight, width = buttonWidth, compound="c")
 myLabel1.place(x=displayWidth-buttonWidth-paddingx, y = (displayHeight-buttonHeight)/2)
-
 
 root.mainloop()
 
