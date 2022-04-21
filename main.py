@@ -109,8 +109,6 @@ startMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight)/2)
 endMeasurementSlider = Scale(root, from_=0, label="V end", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
 endMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight))
 
-
-
 root.mainloop()
 
 
