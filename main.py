@@ -58,7 +58,6 @@ def myButton1Clicked():
     print("zarejestrowano " + str(len(speedTable)) + " próbek")
     print("Czas = " + str(measurement_time))
 
-
 def measure(speed):
     measurement_start = time()
     while(speed < 200):
@@ -82,7 +81,10 @@ myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2
 myButton2.place(x=displayWidth-buttonWidth-paddingx, y=displayHeight-buttonHeight-paddingy)
 myLabel1 = Label(root, textvariable=str(var), bg="#888888", image=pixel, height = buttonHeight, width = buttonWidth, compound="c", font=("Arial", 25))
 myLabel1.place(x=displayWidth-buttonWidth-paddingx, y = (displayHeight-buttonHeight)/2)
-
+endMeasurementSlider = Scale(root, from_=0, label="V end", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
+endMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight))
+startMeasurementSlider = Scale(root, from_=0, label="V start", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
+startMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight)/2)
 root.mainloop()
 
 
