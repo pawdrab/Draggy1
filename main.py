@@ -28,12 +28,17 @@ startButtonString.set("Kliknij aby zaczac pomiar")
 
 measurement_time = 0
 speed = 100
+
 speedTable = []
 timeTable = []
 
 def graph():
     plt.plot(timeTable, speedTable)
+    plt.grid(visible=True)
+
+    plt.savefig("wykres")
     plt.show()
+
 
 def displayCurrentSpeed(speed):
     var.set("V = " + str(round(speed, 2)) + " km/h")
@@ -42,6 +47,16 @@ def displayCurrentSpeed(speed):
 def displayCurrendTime(currentTime):
     startButtonString.set("T = " + str( round(currentTime, 2) ) + " s")
     root.update_idletasks()
+
+def getStartSpeed():
+    startSpeed = startMeasurementSlider.get()
+    print("Start speed = " + str(startSpeed))
+    return (startSpeed)
+
+def getEndSpeed():
+    endSpeed = endMeasurementSlider.get()
+    print("End speed = " + str(endSpeed))
+    return (endSpeed)
 
 def myButton2Clicked():
     graph()
@@ -59,17 +74,23 @@ def myButton1Clicked():
     print("Czas = " + str(measurement_time))
 
 def measure(speed):
+    startSpeed = getStartSpeed()
+    endSpeed = getEndSpeed()
+    print("Start speed after = " + str(startSpeed))
+    print("End speed after = " + str(endSpeed))
+    speedTable.clear()
+    timeTable.clear()
     measurement_start = time()
-    while(speed < 200):
+    while(speed < endSpeed):
         addedValue = random.randint(1, 100)/100
         sleep(1 / 18)
         speed = speed + addedValue
-        speedTable.append(speed)
-        timeTable.append(str(time() - measurement_start))
+        speedTable.append(round(speed, 3))
+        timeTable.append(str(round( (time() - measurement_start) , 3)))
         displayCurrentSpeed(speed)
         displayCurrendTime((time() - measurement_start))
     measurement_stop = time()
-    startButtonString.set("Czas pomiaru : " + str(round((measurement_stop - measurement_start), 2 )) + " s")
+    startButtonString.set("Czas pomiaru : " + str(round((measurement_stop - measurement_start), 3 )) + " s")
     root.update_idletasks()
     return (measurement_stop - measurement_start)
 
@@ -81,10 +102,15 @@ myButton2 = Button(root, text="Pokaż wykres", bg="#888888", command = myButton2
 myButton2.place(x=displayWidth-buttonWidth-paddingx, y=displayHeight-buttonHeight-paddingy)
 myLabel1 = Label(root, textvariable=str(var), bg="#888888", image=pixel, height = buttonHeight, width = buttonWidth, compound="c", font=("Arial", 25))
 myLabel1.place(x=displayWidth-buttonWidth-paddingx, y = (displayHeight-buttonHeight)/2)
-endMeasurementSlider = Scale(root, from_=0, label="V end", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
-endMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight))
+
 startMeasurementSlider = Scale(root, from_=0, label="V start", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
 startMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight)/2)
+
+endMeasurementSlider = Scale(root, from_=0, label="V end", to=250, orient=HORIZONTAL, length = buttonWidth, width=buttonWidth/5, sliderlength=buttonWidth/5, font=("Arial", 50))
+endMeasurementSlider.place(x=paddingx, y=(displayHeight-buttonHeight))
+
+
+
 root.mainloop()
 
 
