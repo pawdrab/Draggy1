@@ -26,7 +26,6 @@ var.set("Zacznij pomiar")
 startButtonString = StringVar()
 startButtonString.set("Kliknij aby zaczac pomiar")
 
-measurement_time = 0
 speed = 100
 
 speedTable = []
@@ -35,9 +34,10 @@ timeTable = []
 def graph():
     plt.plot(timeTable, speedTable)
     plt.grid(visible=True)
-
-    plt.savefig("wykres")
+    plt.autoscale(enable=True, tight=True)
+    plt.locator_params(axis="both", tight=True, nbins=10)
     plt.show()
+    print(round(float(timeTable[-1]), 2 ))
 
 
 def displayCurrentSpeed(speed):
@@ -86,7 +86,7 @@ def measure(speed):
         sleep(1 / 18)
         speed = speed + addedValue
         speedTable.append(round(speed, 3))
-        timeTable.append(str(round( (time() - measurement_start) , 3)))
+        timeTable.append((round( (time() - measurement_start) , 3)))
         displayCurrentSpeed(speed)
         displayCurrendTime((time() - measurement_start))
     measurement_stop = time()
