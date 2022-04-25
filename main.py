@@ -18,6 +18,10 @@ buttonHeight = int(displayHeight/4)
 paddingx = int( displayWidth/20)
 paddingy = int( displayHeight/20)
 
+print("displayWidth = " + str(displayWidth) + " displayHeight = " + str(displayHeight))
+print("buttonWidth = " + str(buttonWidth) + " buttonHeight = " + str(buttonHeight))
+print("paddingx = " + str(paddingx) + " paddingy = " + str(paddingy))
+
 var = StringVar()
 var.set("Zacznij pomiar")
 startButtonString = StringVar()
