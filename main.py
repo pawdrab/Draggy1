@@ -13,11 +13,10 @@ root.attributes("-fullscreen", True)
 root.geometry(str(displayWidth)+"x"+str(displayHeight)+"+0+0")
 pixel = tk.PhotoImage(width=1, height=1)
 
-amountOfButtons = 3
-buttonWidth = int(2*displayWidth/7)
-buttonHeight = int(2*displayHeight/7)
-paddingx = int( (displayWidth-amountOfButtons*buttonWidth)/(amountOfButtons+1) )
-paddingy = int( (displayHeight-amountOfButtons*buttonHeight)/(amountOfButtons+1) )
+buttonWidth = int(displayWidth/3)
+buttonHeight = int(displayHeight/4)
+paddingx = int( displayWidth/20)
+paddingy = int( displayHeight/20)
 
 var = StringVar()
 var.set("Zacznij pomiar")
