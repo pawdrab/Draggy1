@@ -32,6 +32,7 @@ speed = 0
 speedTable = []
 timeTable = []
 
+# elo
 
 def graph():
     plt.plot(timeTable, speedTable)
